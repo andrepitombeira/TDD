@@ -8,9 +8,9 @@ package tdd;
  *
  * @author andre
  */
-public class Dollar extends Money {
+public class Franc extends Money {
 
-    public Dollar(int amount, String currency) {
+    public Franc(int amount, String currency) {
         super(amount, currency);
     }
 }

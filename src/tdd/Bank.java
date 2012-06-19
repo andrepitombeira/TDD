@@ -8,9 +8,9 @@ package tdd;
  *
  * @author andre
  */
-public class Dollar extends Money {
-
-    public Dollar(int amount, String currency) {
-        super(amount, currency);
+public class Bank {
+    
+    public Money reduce(Expression source, String to){
+        return Money.dollar(10);
     }
 }

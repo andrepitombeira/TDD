@@ -1,7 +1,9 @@
 
-import junit.framework.Assert;
+import static junit.framework.Assert.*;
 import org.junit.Test;
-import tdd.Dollar;
+import tdd.Bank;
+import tdd.Expression;
+import tdd.Money;
 
 /*
  * To change this template, choose Tools | Templates and open the template in
@@ -18,10 +20,30 @@ public class MoneyTest {
 
     @Test
     public void testMultiplication() {
-        Dollar five = new Dollar(5);
-        Dollar product = five.times(2);
-        Assert.assertEquals(10, product.amount);
-        product = five.times(3);
-        Assert.assertEquals(15, product.amount);
+        Money five = Money.dollar(5);
+        assertEquals(Money.dollar(10), five.times(2));
+        assertEquals(Money.dollar(15), five.times(3));
+    }
+
+    @Test
+    public void testEquality() {
+        assertTrue(Money.dollar(5).equals(Money.dollar(5)));
+        assertFalse(Money.dollar(5).equals(Money.dollar(6)));
+        assertFalse(Money.franc(5).equals(Money.dollar(5)));
+    }
+
+    @Test
+    public void testCurrency() {
+        assertEquals("USD", Money.dollar(1).currency());
+        assertEquals("CHF", Money.franc(1).currency());
+    }
+    
+    @Test
+    public void testSimpleAddition() {
+        Money five = Money.dollar(5);
+        Expression sum = five.plus(five); 
+        Bank bank = new Bank();
+        Money reduced = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(10), reduced);
     }
 }
